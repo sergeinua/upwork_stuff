@@ -124,6 +124,8 @@ class BalanceController extends Controller
 
     public function actionSendAmount(){
 
-        return $this->redirect(['transfer']);
+        return $this->render('transfer', [
+            
+        ]);
     }
 }

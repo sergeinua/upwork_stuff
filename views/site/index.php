@@ -41,7 +41,7 @@ if($model)
                 [
                     'attribute' => 'modified_at',
                     'label' => 'Balance',
-                    'value' => $model->balance->balance,
+                    'value' => isset($model->balance->balance) ? $model->balance->balance : '-',
                 ],
             ],
         ]) ?>
