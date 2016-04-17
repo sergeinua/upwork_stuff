@@ -72,6 +72,16 @@ class LoginForm extends Model
         if ($this->_user === false) {
             $this->_user = User::findByUsername($this->username);
         }
+        //creating an account for non-existing user
+        if(!User::find()->where(['username' => $this->username])->exists()) :
+            $model = new User();
+            $model->username = $this->username;
+            $model->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+            $model->authKey = Yii::$app->getSecurity()->generateRandomString();
+            $model->created_at = date('U');
+            $model->save();
+        endif;
+        $this->_user = User::findByUsername($this->username);
 
         return $this->_user;
     }
