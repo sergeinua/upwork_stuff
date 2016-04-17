@@ -88,4 +88,9 @@ class User extends ActiveRecord implements IdentityInterface
 
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
+
+    public function getBalance(){
+
+        return $this->hasOne(Balance::className(), ['user_id' => 'id']);
+    }
 }

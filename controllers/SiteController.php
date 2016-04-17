@@ -2,12 +2,14 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\UserSearch;
 
 class SiteController extends Controller
 {
@@ -49,7 +51,14 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        if(Yii::$app->user->identity)
+            $model = User::find()
+                ->where(['username' => Yii::$app->user->identity->username])
+                ->one();
+
+        return $this->render('index', [
+            'model' => isset($model) ? $model : null,
+        ]);
     }
 
     public function actionLogin()

@@ -80,6 +80,11 @@ class LoginForm extends Model
             $model->authKey = Yii::$app->getSecurity()->generateRandomString();
             $model->created_at = date('U');
             $model->save();
+            $balance = new Balance();
+            $balance->user_id = $model->getPrimaryKey();
+            $balance->balance = '0';
+            $balance->modified_at = date('U');
+            $balance->save();
         endif;
         $this->_user = User::findByUsername($this->username);
 

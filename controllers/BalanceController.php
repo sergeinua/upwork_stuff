@@ -121,4 +121,9 @@ class BalanceController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionSendAmount(){
+
+        return $this->redirect(['transfer']);
+    }
 }
