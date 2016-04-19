@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "balance".
  *
  * @property integer $user_id
- * @property string $balance
+ * @property double $balance
  * @property integer $modified_at
  */
 class Balance extends \yii\db\ActiveRecord
@@ -29,7 +29,7 @@ class Balance extends \yii\db\ActiveRecord
         return [
             [['user_id'], 'required'],
             [['user_id', 'modified_at'], 'integer'],
-            [['balance'], 'string', 'max' => 10],
+            [['balance'], 'number'],
         ];
     }
 

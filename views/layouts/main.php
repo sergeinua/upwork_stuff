@@ -62,7 +62,7 @@ AppAsset::register($this);
                             <?= Menu::widget([
                                 'options'=> ['class'=>'sidebar-list sidebar-e'],
                                 'items' => [
-                                    ['label' => 'Send amount','url' => ['/site/index',
+                                    ['label' => 'Send amount','url' => ['/transfer/create',
                                         'user_id'=>Yii::$app->user->identity->id],
                                         'options' =>['class' => 'sidebar-list-item']],
                                     ['label' => 'Recieved payments', 'url' => ['/site/index'], 'options' =>['class' => 'sidebar-list-item']],
