@@ -78,11 +78,33 @@ class TransferController extends Controller
             $transaction = Yii::$app->getDb()->beginTransaction();
             try{
                 $model->created_at = time('U');
+                // if transition is for the non-existing user
+                if (!User::find()->where(['username' => $model->to])->exists()) :
+                    (new User([
+                        'username' => $model->to,
+                        'created_at' => date('U'),
+                    ]))->save();
+                endif;
+                $model->to = User::find()->where(['username' => $model->to])->one()->id;
                 $model->save();
-                $balance = Balance::find()->where(['user_id' => $model->from])->one();
-                $balance->balance = $balance->balance - $model->amount;
-                $balance->modified_at = date('U');
-                $balance->save();
+                // decreasing sender's balance
+                $balance_sender = Balance::find()->where(['user_id' => $model->from])->one();
+                $balance_sender->balance = $balance_sender->balance - $model->amount;
+                $balance_sender->modified_at = date('U');
+                $balance_sender->save();
+                // increasing receiver's balance
+                if(!Balance::find()->where(['user_id' => $model->to])->exists()) :
+                    (new Balance([
+                        'user_id' => $model->to,
+                        'balance' => $model->amount,
+                        'modified_at' => date('U'),
+                    ]))->save();
+                else :
+                    $balance_receiver = Balance::find()->where(['user_id' => $model->to])->one();
+                    $balance_receiver->balance = $balance_receiver->balance + $model->amount;
+                    $balance_receiver->modified_at = date('U');
+                    $balance_receiver->save();
+                endif;
                     $transaction->commit();
             } catch (Exception $e) {
                 $transaction->rollBack();

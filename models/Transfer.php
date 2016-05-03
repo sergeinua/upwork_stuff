@@ -30,7 +30,7 @@ class Transfer extends \yii\db\ActiveRecord
     {
         return [
             [['from', 'to', 'amount', 'created_at'], 'required'],
-            [['from', 'to', 'created_at'], 'integer'],
+            [['from', 'created_at'], 'integer'],
             [['amount'], 'number'],
         ];
     }
