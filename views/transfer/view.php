@@ -7,8 +7,6 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Transfer */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Transfers', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transfer-view">
 

@@ -7,8 +7,6 @@ use yii\helpers\Html;
 /* @var $model app\models\Bill */
 
 $this->title = 'Create Bill';
-$this->params['breadcrumbs'][] = ['label' => 'Bills', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="bill-create">
 

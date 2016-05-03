@@ -8,16 +8,12 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Transfers';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transfer-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Transfer', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -29,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'from',
                 'visible' => Yii::$app->controller->action->id == 'outgoing' ? false : true,
                 'value' => function($model){
-                    return $model->userFrom->username;
+                    return isset($model->userFrom->username) ? $model->userFrom->username : '';
                 }
             ],
             [

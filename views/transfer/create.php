@@ -7,8 +7,6 @@ use yii\helpers\Html;
 /* @var $model app\models\Transfer */
 
 $this->title = 'Create Transfer';
-$this->params['breadcrumbs'][] = ['label' => 'Transfers', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="transfer-create">
 
