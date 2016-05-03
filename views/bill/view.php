@@ -23,8 +23,10 @@ $this->title = $model->id;
                 ],
             ]) ?>
     <?php else : ?>
-        <?= Html::a('Accept', ['accept', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Decline', ['decline', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+        <?php if($model->status == 'pending') : ?>
+            <?= Html::a('Accept', ['accept', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Decline', ['decline', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+        <?php endif; ?>
     <?php endif; ?>
     </p>
     <?= DetailView::widget([

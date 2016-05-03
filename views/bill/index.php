@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\BillSearch */
@@ -20,27 +21,43 @@ $this->title = 'Bills';
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            [
+                'attribute' => 'id',
+                'value' => function ($model) {
+                    return Html::a(Html::encode($model->id), Url::to(['view', 'id' => $model->id]));
+                },
+                'format' => 'raw',
+            ],
             [
                 'attribute' => 'from',
                 'visible' => Yii::$app->controller->action->id == 'outgoing' ? false : true,
                 'value' => function($model){
-                    return $model->userFrom->username;
-                }
+                    return Html::a(Html::encode($model->userFrom->username), Url::to(['view', 'id' => $model->id]));
+                },
+                'format' => 'raw',
             ],
             [
                 'attribute' => 'to',
                 'visible' => Yii::$app->controller->action->id == 'incoming' ? false : true,
                 'value' => function($model){
-                    return $model->userTo->username;
-                }
+                    return Html::a(Html::encode($model->userTo->username), Url::to(['view', 'id' => $model->id]));
+                },
+                'format' => 'raw',
             ],
-            'amount',
-            'status',
-            // 'created_at',
-            // 'transfer_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'amount',
+                'value' => function($model){
+                    return Html::a(Html::encode($model->amount), Url::to(['view', 'id' => $model->id]));
+                },
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function($model){
+                    return Html::a(Html::encode($model->status), Url::to(['view', 'id' => $model->id]));
+                },
+                'format' => 'raw',
+            ],
         ],
     ]); ?>
 </div>
