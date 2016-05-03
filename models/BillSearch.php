@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Transfer;
+use app\models\Bill;
 
 /**
- * TransferSearch represents the model behind the search form about `app\models\Transfer`.
+ * BillSearch represents the model behind the search form about `app\models\Bill`.
  */
-class TransferSearch extends Transfer
+class BillSearch extends Bill
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class TransferSearch extends Transfer
     public function rules()
     {
         return [
-            [['id', 'from', 'to', 'created_at'], 'integer'],
+            [['id', 'from', 'to', 'status', 'created_at', 'transfer_id'], 'integer'],
             [['amount'], 'number'],
         ];
     }
@@ -41,7 +41,7 @@ class TransferSearch extends Transfer
      */
     public function search($params)
     {
-        $query = Transfer::find();
+        $query = Bill::find();
 
         // add conditions that should always apply here
 
@@ -63,15 +63,10 @@ class TransferSearch extends Transfer
             'from' => $this->from,
             'to' => $this->to,
             'amount' => $this->amount,
+            'status' => $this->status,
             'created_at' => $this->created_at,
+            'transfer_id' => $this->transfer_id,
         ]);
-
-        if(Yii::$app->controller->action->id == 'incoming')
-            $query->andFilterWhere(['to' => Yii::$app->user->identity->id]);
-
-        if(Yii::$app->controller->action->id == 'outgoing')
-            $query->where(['from' => Yii::$app->user->identity->id]);
-
 
         return $dataProvider;
     }

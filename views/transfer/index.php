@@ -25,10 +25,27 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'from',
-            'to',
+            [
+                'attribute' => 'from',
+                'visible' => Yii::$app->controller->action->id == 'outgoing' ? false : true,
+                'value' => function($model){
+                    return $model->userFrom->username;
+                }
+            ],
+            [
+                'attribute' => 'to',
+                'visible' => Yii::$app->controller->action->id == 'incoming' ? false : true,
+                'value' => function($model){
+                    return $model->userTo->username;
+                }
+            ],
             'amount',
-            'created_at',
+            [
+                'attribute' => 'created_at',
+                'value' => function($model){
+                    return date('d-m-Y h:i:s', $model->created_at);
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

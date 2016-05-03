@@ -65,8 +65,11 @@ AppAsset::register($this);
                                     ['label' => 'Send amount','url' => ['/transfer/create',
                                         'user_id'=>Yii::$app->user->identity->id],
                                         'options' =>['class' => 'sidebar-list-item']],
-                                    ['label' => 'Recieved payments', 'url' => ['/site/index'], 'options' =>['class' => 'sidebar-list-item']],
-                                    ['label' => 'Sent payments', 'url' => ['/site/index'], 'options' =>['class' => 'sidebar-list-item']],
+                                    ['label' => 'Recieved payments', 'url' => ['/transfer/incoming'], 'options' =>['class' => 'sidebar-list-item']],
+                                    ['label' => 'Sent payments', 'url' => ['/transfer/outgoing'], 'options' =>['class' => 'sidebar-list-item']],
+                                    ['label' => 'Create bill', 'url' => ['/bill/create'], 'options' =>['class' => 'sidebar-list-item']],
+                                    ['label' => 'Incoming bills', 'url' => ['/bill/incoming'], 'options' =>['class' => 'sidebar-list-item']],
+                                    ['label' => 'Outgoing bills', 'url' => ['/bill/outgoing'], 'options' =>['class' => 'sidebar-list-item']],
                             ]]); ?>
                         </div>
                     <?php endif; ?>

@@ -2,26 +2,27 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\models\User;
-use yii\helpers\ArrayHelper;
-use yii\jui\AutoComplete;
-
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Transfer */
+/* @var $model app\models\Bill */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="transfer-form">
+<div class="bill-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'to')->widget(AutoComplete::className(), [
-        'options' => ['class' => 'form-control'],
-        'clientOptions' => ['source' => $autocomplete],
-    ])->label('To') ?>
+    <?= $form->field($model, 'from')->textInput() ?>
+
+    <?= $form->field($model, 'to')->textInput() ?>
 
     <?= $form->field($model, 'amount')->textInput() ?>
+
+    <?= $form->field($model, 'status')->textInput() ?>
+
+    <?= $form->field($model, 'created_at')->textInput() ?>
+
+    <?= $form->field($model, 'transfer_id')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
