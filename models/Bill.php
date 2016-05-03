@@ -32,7 +32,8 @@ class Bill extends \yii\db\ActiveRecord
     {
         return [
             [['from', 'to', 'amount', 'status', 'created_at'], 'required'],
-            [['from', 'to', 'status', 'created_at', 'transfer_id'], 'integer'],
+            [['from', 'created_at', 'modified_at', 'transfer_id'], 'integer'],
+            [['status'], 'string'],
             [['amount'], 'number'],
         ];
     }
@@ -49,7 +50,25 @@ class Bill extends \yii\db\ActiveRecord
             'amount' => 'Amount',
             'status' => 'Status',
             'created_at' => 'Created At',
+            'modified_at' => 'Modified at',
             'transfer_id' => 'Transfer ID',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserFrom()
+    {
+        return $this->hasOne(User::className(), ['id' => 'from']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserTo()
+    {
+        return $this->hasOne(User::className(), ['id' => 'to']);
+    }
+
 }

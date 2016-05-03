@@ -23,6 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Accept', ['accept', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Decline', ['decline', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
     </p>
 
     <?= DetailView::widget([

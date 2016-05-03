@@ -68,6 +68,12 @@ class BillSearch extends Bill
             'transfer_id' => $this->transfer_id,
         ]);
 
+        if(Yii::$app->controller->action->id == 'incoming')
+            $query->andFilterWhere(['to' => Yii::$app->user->identity->id]);
+
+        if(Yii::$app->controller->action->id == 'outgoing')
+            $query->where(['from' => Yii::$app->user->identity->id]);
+
         return $dataProvider;
     }
 }
